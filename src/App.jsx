@@ -3,7 +3,7 @@ import EventList from "./Components/EventList"
 import AddEvents from "./Components/AddEvents"
 function App() {
   return (
-    <section className="">
+    <section className="p-4">
       <div className="flex justify-between">
         <span>
           <FaCalendar />
