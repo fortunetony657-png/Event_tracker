@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { FaPlus, FaArrowRight } from "react-icons/fa";
+import { FaPlus, FaArrowRight, FaTrash } from "react-icons/fa";
 import { TbCalendarSearch } from "react-icons/tb";
-import { Trash } from "lucide-react";
 function AddEvents(){
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
@@ -32,80 +31,83 @@ function makingExpand(id){
     setExpand(expand === id ? null : id)
 };
     return(
-        <section>
-            <div className="flex items-center gap-2">
-                <span> <FaPlus className="border-1 border-green-500 rounded-full text-green-500" /></span>
-                <span>
+        <section className="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6 border">
+            <div className="flex items-center gap-2 mb-4">
+                <span> <FaPlus className="border border-green-500 rounded-full text-green-500 p-1 text-xl" /></span>
+                <span className="font-semibold text-gray-700">
                     Add New Event
                 </span>
             </div>
-            <form onSubmit={handleSubmit}>
-                <div className="">
+            <form 
+            onSubmit={handleSubmit}
+            className=" bg-white border rounded-xl p-4">
+                <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                        <p>Enter Event Name</p>
+                        <p className="text-xs text-gray-500 mb-2">Enter Event Name</p>
                         <textarea
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="border-1"
+                            className="w-full border rounded-lg p-3 resize-none focus:outline-none focus:ring-2 focus:ring-green-400"
                             placeholder="Event name"
                         ></textarea>
                     </div>
                     <div>
-                        <p>Event Date</p>
+                        <p className="text-xs text-gray-500 mb-2">Event Date</p>
                         <div>
                             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="border-1 flex gap-2 p-2 items-center">
+                <button type="submit" className="mt-4 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-lg flex items-center gap-2">
                     Add Event 
-                    <span className="border-1 border-green-500 rounded-full text-green-500">
+                    <span className="bg-white text-green-500 rounded-full p-1">
                         <FaArrowRight />
                     </span>
                 </button>
             </form>
 
-            <div className="mt-4">
-                <h3 className="flex items-center gap-4">
-                    <span className="font-[100] text-black/50">
+            <div className="mt-8">
+                <h3 className="flex items-center gap-3 font-semibold">
+                    <span className="text-gray-500">
                         <TbCalendarSearch />
                     </span>
                     Current Events 
-                    <span className="text-green-700 bg-green-200 px-2 font-[500] rounded-full">
+                    <span className="text-green-700 bg-green-100 px-3 py-1 text-sm rounded-full">
                         {events.length} Events
                     </span>
                 </h3>
                 <div>
                     {events.map((ev) => (
-                        <div key={ev.id} className="flex justify-between items-center p-2 my-2">
-                            <div className=" w-30 break-words">
+                        <div key={ev.id} className="flex justify-between items-center border rounded-xl p-5 my-4 shadow-sm hover:shadow-md transition">
+                            <div className="w-40">
                                 <h2 onClick={()=> makingExpand(ev.id)}
                                     className={`cursor-pointer ${expand === ev.id ? "" : "line-clamp-1"}`}
                                     >
                                     {ev.name}
                                 </h2>
-                                <p className="text-[10px] text-purple-700 bg-purple-300 border-1 border-purple-700 px-2 font-[500] rounded-full w-fit">
+                                <p className="text-[10px] text-purple-700 bg-purple-300 border border-purple-700 px-2 font-medium rounded-full w-fit">
                                     Date
                                 </p>
-                                <p>
+                                <p className="text-sm text-gray-500 mt-2">
                                     {ev.date}
                                 </p>
                             </div>
                             
                             <div>
                                     {gettingRemainingDays(ev.date) > 0 ? (
-                                        <div className="flex flex-col text-blue-700 justify-center items-center">
-                                            <p>{gettingRemainingDays(ev.date)}</p>
-                                            <p className="text-black">Days left</p>
+                                        <div className="flex flex-col justify-center items-center">
+                                            <p className="text-4xl font-bold text-blue-600">{gettingRemainingDays(ev.date)}</p>
+                                            <p className="text-[10px] text-gray-400 uppercase">Days left</p>
                                         </div> 
                                     ) : (
-                                        <span className="text-red-500">Event Passed</span>
+                                        <span className="text-red-500 font-semibold">Event Passed</span>
                                     )}
                                 
                             </div>
                             <div>
-                                <div onClick={() => deleteEvent(ev.id)}>
-                                    <Trash />
+                                <div onClick={() => deleteEvent(ev.id)}
+                                    className="cursor-pointer border border-red-300 text-red-500 rounded-lg px-4 py-2 hover:bg-red-50">
+                                    <FaTrash />
                                 </div>
                             </div>
                         </div>
