@@ -15,20 +15,20 @@ function EventTracker() {
 
   return (
     <section className="p-4">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-3">
         <Link to={"/"}>
             <span>
                 <FaHome />
             </span>
         </Link>
         <h1><span>CHRONO</span>Track</h1>
-        <div>
+        <div className="flex gap-1 justify-center items-center">
           <span>
             <FaCalendar />
           </span>
-          <div className="text-sm">
-            <p>Today is</p>
-            <p>
+          <div className=" flex flex-col justify-center">
+            <p className="text-sm leading-none">Today is</p>
+            <p className="text-[10px] text-neutral-500">
               {dateFormat}
             </p>
           </div>

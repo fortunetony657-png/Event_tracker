@@ -78,17 +78,18 @@ function makingExpand(id){
                 </h3>
                 <div>
                     {events.map((ev) => (
-                        <div key={ev.id} className="flex justify-between items-center border rounded-xl p-5 my-4 shadow-sm hover:shadow-md transition">
-                            <div className="w-40">
+                        <div key={ev.id} className="flex flex-col justify-between w-[100%] items-center border-1 break-words rounded-xl px-0 py-5 my-4 shadow-sm hover:shadow-md transition">
+                            <div className="w-[100%] px-5 flex justify-between">
                                 <h2 onClick={()=> makingExpand(ev.id)}
-                                    className={`cursor-pointer ${expand === ev.id ? "" : "line-clamp-1"}`}
+                                    className={`cursor-pointer ${expand === ev.id ? "break-words w-20" : "line-clamp-1 w-20 break-words mb-2"}`}
                                     >
                                     {ev.name}
                                 </h2>
-                                <p className="text-[10px] text-purple-700 bg-purple-300 border border-purple-700 px-2 font-medium rounded-full w-fit">
+                                
+                                <p className="text-sm text-gray-500 mt-2 flex flex-col">
+                                    <span className="text-[10px] text-purple-700 bg-purple-300 border border-purple-700 px-2 font-medium rounded-full w-fit">
                                     Date
-                                </p>
-                                <p className="text-sm text-gray-500 mt-2">
+                                    </span>
                                     {ev.date}
                                 </p>
                             </div>
